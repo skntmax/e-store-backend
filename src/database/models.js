@@ -1,21 +1,10 @@
 import { Schema } from "mongoose";
-let user_scheam =   {
-     username:{
-        type:String ,
-        required:true 
-     } ,
-
-     email:{
-        type:String ,
-        required:true 
-     } ,
-     password:{
-        type:String ,
-        required:true 
-     } ,
-}
-
-let user_Model_Schema = new Schema( user_scheam  )
+import schema from './All_schema/schemas.js' 
 
 
-export {user_Model_Schema} 
+let user_Model_Schema = new Schema( schema.users_schema  )
+let productSchema = new Schema( schema.product_schema )
+let orderSchema = new Schema( schema.order_schema )
+
+
+export {user_Model_Schema , productSchema , orderSchema} 
