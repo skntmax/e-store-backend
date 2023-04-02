@@ -12,6 +12,7 @@ export function succesServiceResponse(data , message="success" ) {
 export function failedServiceResponse(err , message="failed" ) {
      
     return {
+        error:err,
         status:404 ,
         result:null ,
         error:true,

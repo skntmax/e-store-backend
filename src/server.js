@@ -12,6 +12,7 @@ import prdRouter from './products/prd.js'
 import cors from 'cors'
 import { succesServiceResponse , failedServiceResponse } from "./helper.js";
 import { autMiddleWare } from "./middleware.js";
+import amdin_router from "./admin/admin.js";
 export const upload = multer({ dest: 'uploads/' })
 
 dotenv.config()
@@ -21,7 +22,10 @@ let port = process.env.PORT
 const app = express()
 app.use(express.json())
 app.use(cors())
+ 
 app.use('/products', prdRouter)
+app.use('/admin', amdin_router)
+
 // app.use("user" , auth_route)
 
 
@@ -67,8 +71,6 @@ app.post('/signup' , async(req, res)=>{
 })
 
 
-
-
 app.post('/login' , async(req, res)=>{
 
      try{
@@ -94,8 +96,8 @@ app.post('/login' , async(req, res)=>{
 
              }else{
                  res.send(
-                    failedServiceResponse( " invalid credential " ,"invalid credential" ) 
-                   )
+                     failedServiceResponse( " invalid credential " ,"invalid credential" ) 
+                    )
               }
           }
 

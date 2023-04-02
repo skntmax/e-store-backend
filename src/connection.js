@@ -10,5 +10,6 @@ export function init() {
         }).catch(err=>{
              console.log("connection error ");
             })
-        
+mongoose.set('strictQuery', false);
+
     } 
