@@ -27,14 +27,14 @@ export default {
     },
 
    product_schema:{
+       id:Number,
      title:{
          type:String ,
           required:true    
      } ,
-     discription:{
+     description:{
         type:String ,   
         required:true    
-
      } ,
       
      image:{
@@ -48,7 +48,12 @@ export default {
      createdOn:{
         type:Date ,
         default:()=>Date.now()
-     }   
+     }   ,
+    
+     qty:Number,
+     rating:{
+      type:Object
+     }
 
    }
    , 

@@ -50,17 +50,17 @@ prd_router.post('/', async(req,res)=>{
        
 
       prd_router.post('/buyproduct',autMiddleWare, async(req,res)=>{
-         
+          
         try{ 
-
           const { prd_list , total_price }  = req.body.model 
+           
           let user_orders = await orders.create({
-            products:prd_list ,
+             products:prd_list ,
              total:total_price,
              user:req.body.id
           })
-              
-            await user_orders.save() 
+
+             await user_orders.save() 
              res.send(succesServiceResponse(user_orders ,"order placed"))
           }
            catch(err) {
@@ -69,15 +69,11 @@ prd_router.post('/', async(req,res)=>{
       })
 
 
-
-
-
       prd_router.get('/buyproduct-history',autMiddleWare , async(req,res)=>{
          
         try{ 
 
           const { id }  = req.body 
-
          orders.find({user:id}).select().populate('user' ,"email").exec((err,doc)=>{
             if(err)
             res.send(failedServiceResponse(err , " some error occured  "))           

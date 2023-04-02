@@ -3,13 +3,17 @@ import dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
 import {init} from './connection.js'
 // import { creatAllModels } from "./database/all_models.js";
+import fs from 'fs'
+import prd from './z.js'
 import multer  from 'multer'
-import { users } from "./database/all_models.js";
+import { products, users } from "./database/all_models.js";
 import jsonwebtoken from 'jsonwebtoken'
 import prdRouter from './products/prd.js'
 import cors from 'cors'
 import { succesServiceResponse , failedServiceResponse } from "./helper.js";
+import { autMiddleWare } from "./middleware.js";
 export const upload = multer({ dest: 'uploads/' })
+
 dotenv.config()
 init()
 
@@ -65,7 +69,6 @@ app.post('/signup' , async(req, res)=>{
 
 
 
-
 app.post('/login' , async(req, res)=>{
 
      try{
@@ -105,7 +108,27 @@ app.post('/login' , async(req, res)=>{
 
 
 
+// app.get('/insert' , async (req,res)=>{
+//  let pr= prd.data.map((ele,ind)=>  { return {...ele, qty:1} } )
+//    products.insertMany(pr , (err,data)=>{
+//      if(err) throw new Error(err)
+//      console.log(data);      
+//    })
+// }) // api to inset product data in to our product collection    
 
+
+
+app.get('/get-products'  , async (req,res)=>{
+
+    try{
+        let prd   = await products.find({})
+         return res.send(succesServiceResponse(prd ,"20 product fetched "))
+    }catch(err){
+       return res.send(failedServiceResponse(err, "some error occured "))   
+    }
+       
+   })    
+   
 
 
 
