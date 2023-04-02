@@ -74,13 +74,13 @@ prd_router.post('/', async(req,res)=>{
         try{ 
 
           const { id }  = req.body 
-         orders.find({user:id}).select().populate('user' ,"email").exec((err,doc)=>{
+          orders.find({user:id}).select().populate('user' ,"email" ).exec((err,doc)=>{
             if(err)
             res.send(failedServiceResponse(err , " some error occured  "))           
             else  
             res.send(succesServiceResponse(doc ,"order placed"))
           })
-          
+
           }
            catch(err) {
           res.send(failedServiceResponse(err , " some error occured  "))           

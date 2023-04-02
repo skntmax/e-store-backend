@@ -81,11 +81,11 @@ app.post('/login' , async(req, res)=>{
         }else{
             console.log(user_data);
             let isPass = await  bcrypt.compare(password, user_data[0].password )
-   
              if(isPass) {
                let token = jsonwebtoken.sign({ _id:user_data[0]._id }, process.env.SECRET_KEY );
                res.status(200).send(
                   succesServiceResponse(  {
+                    isAdmin:user_data[0].admin,
                     token:token ,
                    username:user_data[0].username ,
                    email:user_data[0].email 
@@ -125,13 +125,9 @@ app.get('/get-products'  , async (req,res)=>{
          return res.send(succesServiceResponse(prd ,"20 product fetched "))
     }catch(err){
        return res.send(failedServiceResponse(err, "some error occured "))   
-    }
-       
+    }  
    })    
    
-
-
-
 
 app.listen( port ,   ()=>{
      console.log(" server started at  "+port);
